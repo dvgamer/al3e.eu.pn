@@ -1,0 +1,1 @@
+<textarea style="width:400px;height:100px; resize:none; outline:none !important;"></textarea>
