@@ -7,7 +7,6 @@
 <!--[if IE 9]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 <script language="javascript" src="include/jquery-2.0.3.min.js"></script>
 <script language="javascript" src="include/jquery.ui.min.js"></script>
-<script language="javascript" src="include/jQuery.jPlayer.2.5.0/jquery.jplayer.min.js"></script>
 <link rel="stylesheet" href="include/css/html5reset-1.6.1.css" type="text/css">
 <link rel="stylesheet" href="include/css/default_css.css" type="text/css">
 <link rel="stylesheet" href="include/css/webfont.css" type="text/css">
@@ -40,25 +39,25 @@ $(function(){
 			open(location, '_self').close();
 		});
 		// Theme Site
-		$("#jquery_jplayer_1").jPlayer({
-			ready: function () {
-				$(this).jPlayer("setMedia", {
-					mp3: "include/IntroTheme.mp3"
-				}).jPlayer("stop").jPlayer("option", "volume", v);
-			},
-			ended: function() {
-				$(this).jPlayer("play");
-			 },
-			swfPath: "/include/jQuery.jPlayer.2.5",
-			supplied: "mp3"
-		});
+		// $("#jquery_jplayer_1").jPlayer({
+		// 	ready: function () {
+		// 		$(this).jPlayer("setMedia", {
+		// 			mp3: "include/IntroTheme.mp3"
+		// 		}).jPlayer("stop").jPlayer("option", "volume", v);
+		// 	},
+		// 	ended: function() {
+		// 		$(this).jPlayer("play");
+		// 	 },
+		// 	swfPath: "/include/jQuery.jPlayer.2.5",
+		// 	supplied: "mp3	"
+		// });
 		var v = 0.5;
-		$(document).bind("mousewheel", function(e){
-			if(e.shiftKey) {
-				if(e.originalEvent.wheelDelta>0){v+=0.1;if(v>1)v=1;}else{v-=0.1;if(v<0)v=0;}
-				$("#jquery_jplayer_1").jPlayer("option", "volume", v)
-			}
-		});
+		// $(document).bind("mousewheel", function(e){
+		// 	if(e.shiftKey) {
+		// 		if(e.originalEvent.wheelDelta>0){v+=0.1;if(v>1)v=1;}else{v-=0.1;if(v<0)v=0;}
+		// 		$("#jquery_jplayer_1").jPlayer("option", "volume", v)
+		// 	}
+		// });
 		
 //		$(document).click(function (e) {
 //			var tmp = $('#new').clone();
@@ -134,7 +133,7 @@ $(function(){
 		var anime = $($('anime-list#store').html()).clone();
 		$('anime-list#store').empty();
 		$.ajax({ url: "_sync/ongoing.json",
-			type: 'POST',
+			type: 'GET',
 			xhr: function()
 			{
 				$('preload#message span').html('PLEASE WAIT...');
@@ -160,8 +159,7 @@ $(function(){
 			},
 			success: function(data){
 				console.log('Total Anime: ' + data.length);
-				for (i=0;i<2;i++) {
-					console.log(data);
+				for (i=0;i<data.length;i++) {
 					var list = anime.clone();
 					list.find('.title').html(data[i].Title);
 					list.find('.ongoing').html(data[i].Subject);
